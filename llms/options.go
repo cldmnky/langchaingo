@@ -13,6 +13,12 @@ type CallOptions struct {
 	Temperature float64 `json:"temperature"`
 	// StopWords is a list of words to stop on.
 	StopWords []string `json:"stop_words"`
+	// TopK is the number of tokens to sample from.
+	TopK int `json:"top_k"`
+	// TopP is the cumulative probability for top-k sampling.
+	TopP float64 `json:"top_p"`
+	// RepetitionPenalty is the repetition penalty.
+	RepetitionPenalty float64 `json:"repetition_penalty"`
 }
 
 // WithModel is an option for LLM.Call.
@@ -40,6 +46,27 @@ func WithTemperature(temperature float64) CallOption {
 func WithStopWords(stopWords []string) CallOption {
 	return func(o *CallOptions) {
 		o.StopWords = stopWords
+	}
+}
+
+// WithTopK is an option for LLM.Call.
+func WithTopK(topK int) CallOption {
+	return func(o *CallOptions) {
+		o.TopK = topK
+	}
+}
+
+// WithTopP is an option for LLM.Call.
+func WithTopP(topP float64) CallOption {
+	return func(o *CallOptions) {
+		o.TopP = topP
+	}
+}
+
+// WithRepetitionPenalty is an option for LLM.Call.
+func WithRepetitionPenalty(repetitionPenalty float64) CallOption {
+	return func(o *CallOptions) {
+		o.RepetitionPenalty = repetitionPenalty
 	}
 }
 
